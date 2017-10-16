@@ -1,0 +1,109 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    // Candidates
+    "candidates": {
+      "$candidate": {
+        ".read": true,
+
+        "name": { ".validate": "newData.isString()" },
+        "pictureUrl": { ".validate": "newData.isString()" },
+        "phone": { ".validate": "newData.isString()" },
+        "email": { ".validate": "newData.isString()" },
+        "birthdate": { ".validate": "newData.isString()" },
+
+        "$other": { ".validate": false }
+      }
+    },
+
+    // Pages
+    "pages": {
+      "$page": {
+        ".read": true,
+
+        "accentColor": { ".validate": "newData.isString()" },
+
+        // Candidate
+        "candidate": { ".validate": "root.child('candidates').hasChild(newData.val())" },
+
+        // Workplaces
+        "workplaces": {
+          "$workplace": {
+            "name": { ".validate": "newData.isString()" },
+            "websiteUrls": { ".validate": "newData.isString()" },
+            "pictureUrl": { ".validate": "newData.isString()" },
+            "position": { ".validate": "newData.isString()" },
+            "period": {
+              "from": { ".validate": "newData.isString()" },
+              "to": { ".validate": "newData.isString()" },
+
+              "$other": { ".validate": false }
+            },
+            "responsibilities": {
+              "$responsibility": {
+                "name": { ".validate": "newData.isString()" },
+                "$other": { ".validate": false }
+              }
+            },
+            "pageBreak": { ".validate": "newData.isString()" },
+
+            "$other": { ".validate": false }
+          }
+        },
+
+        // Education
+        "education": {
+          "$education": {
+            "name": { ".validate": "newData.isString()" },
+            "pictureUrl": { ".validate": "newData.isString()" },
+            "position": { ".validate": "newData.isString()" },
+            "period": {
+              "from": { ".validate": "newData.isString()" },
+              "to": { ".validate": "newData.isString()" },
+
+              "$other": { ".validate": false }
+            },
+            "subjects": {
+              "$subject": {
+                "name": { ".validate": "newData.isString()" },
+                "$other": { ".validate": false }
+              }
+            },
+            "pageBreak": { ".validate": "newData.isString()" },
+
+            "$other": { ".validate": false }
+          }
+        },
+
+        // Languages
+        "languages": {
+          "$language": {
+            "name": { ".validate": "newData.isString()" },
+            "understanding": { ".validate": "newData.isString()" },
+            "speaking": { ".validate": "newData.isString()" },
+            "writing": { ".validate": "newData.isString()" },
+
+            "$other": { ".validate": false }
+          }
+        },
+
+        // Skills
+        "skills": {
+          "$skill": {
+            "name": { ".validate": "newData.isString()" },
+            "description": { ".validate": "newData.isString()" },
+            "pageBreak": { ".validate": "newData.isString()" },
+
+            "$other": { ".validate": false }
+          }
+        },
+
+        "$other": { ".validate": false }
+      }
+    },
+
+    "$other": { ".validate": false }
+  }
+}
