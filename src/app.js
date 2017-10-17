@@ -5,14 +5,14 @@ import classy from 'classwrap';
 
 import { Home, HomeModule } from './home';
 import { Navigation } from './navigation';
-import { Page } from './page';
+import { Page, PageDetails, PageDetailsModule } from './page';
 
 import { createRouter } from './router';
 
 export const Routes = {
   HOME: { path: '/', title: 'Home' },
   PAGE_CREATE: { path: '/pages/new', title: 'Create Page' },
-  PAGE: { path: '/pages/:pageId', title: 'Page' },
+  PAGE_DETAILS: { path: '/pages/:pageId', title: 'Page' },
   OTHER: { path: ':url', title: 'Page Not Found' }
 };
 
@@ -46,20 +46,21 @@ export const Actions = createApp({
 
     // Thunks that return slices of the state, but don't cause a re-render
     getRoute: (state) => () => state.router.route,
-    // NOTE: If needed, we can allow using dot notation to go deeper *inception.jpg*
+    getRouteParams: (state) => () => state.router.params,
     getModuleState: (state, actions, moduleKey) => () => state[moduleKey],
     getModuleActions: (state, actions, moduleKey) => () => actions[moduleKey]
   },
   modules: {
     home: HomeModule,
+    pageDetails: PageDetailsModule,
 
     router: router.module
   },
   view: (state, actions) =>
     <div class={classy(['fade-in', { 'fade-in-start': state.animation  }])}>
-      <Navigation />
       <div class="page-container">
         <Page route={Routes.HOME} view={Home} module="home" resolve={actions.home.getData} />
+        <Page route={Routes.PAGE_DETAILS} view={PageDetails} module="pageDetails" resolve={actions.pageDetails.getData} />
       </div>
     </div>
 });

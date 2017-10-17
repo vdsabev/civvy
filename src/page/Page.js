@@ -16,10 +16,9 @@ export const Page = (props) => {
   return (
     <props.view
       key={props.module}
-      state={Actions.getModuleState(props.module)}
-      actions={Actions.getModuleActions(props.module)}
       onremove={props.cache ? fadeOutPage : invalidateCacheAndFadeOutPage(props.module) }
-    />
+      {...Actions.getModuleState(props.module)}
+    >{Actions.getModuleActions(props.module)}</props.view>
   );
 };
 
@@ -37,7 +36,7 @@ const cacheAndResolveWithLoader = (moduleKey, resolve) => {
 
   if (!cachedModule.$pending) {
     cachedModule.$pending = true;
-    resolve()
+    resolve(Actions.getRouteParams())
       .then(() => {
         cachedModule.$resolved = true;
         cachedModule.$pending = false;

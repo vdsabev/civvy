@@ -3,7 +3,7 @@ const style = {};
 style.animationDuration = 0.4;
 
 style.fonts = {
-  text: 'PT Sans'
+  text: 'Open Sans'
 };
 
 style.css = {
@@ -14,20 +14,27 @@ style.css = {
   fontText: style.fonts.text,
 
   foregroundLight: '#999999',
-  foreground: '#666666',
-  foregroundDark: '#333333',
+  foreground: '#404040',
+  foregroundDark: '#2c3e50',
   foregroundDarker: '#000000',
 
   neutralLighter: '#ffffff',
-  neutralLight: '#ecf0f1',
-  neutral: '#bdc3c7',
+  neutralLight: '#ffffff',
+  neutral: '#ecf0f1',
   neutralDark: '#95a5a6',
 
   primary: '#2980b9',
   success: '#2ecc71',
   warning: '#f1c40f',
   danger: '#e74c3c',
-  info: '#3498db'
+  info: '#3498db',
+
+  h1FontSize: '48px',
+  h2FontSize: '30px',
+  h3FontSize: '24px',
+  h4FontSize: '20px',
+  h5FontSize: '16px',
+  h6FontSize: '14px'
 };
 
 // Export for both Node.js and the browser

@@ -1,0 +1,77 @@
+.page-header .fa,
+.page-timeline-point .fa {
+  margin-right: 0.25rem;
+}
+
+.page-item-info .fa,
+.language-list .fa {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.page-section {
+  margin: 0 auto;
+  padding: 35px 30px;
+  width: 100%;
+  max-width: 680px;
+}
+
+.page-header,
+.page-header-link {
+  color: var(--neutralLight);
+}
+
+.page-timeline {
+  page-break-inside: avoid;
+  page-break-after: auto;
+}
+
+.page-timeline-point {
+  line-height: 24px;
+  font-variant: small-caps;
+}
+
+.page-timeline-content {
+  margin-top: 0;
+  margin-left: 8px;
+  border-left: 5px solid var(--neutral);
+  padding-top: 2px;
+  padding-bottom: 20px;
+  padding-left: 12px;
+}
+
+.page-spacer {
+  margin-bottom: 5px;
+}
+
+/* Candidate */
+.candidate-picture {
+  border-radius: 50%;
+  width: 128px;
+}
+
+/* Workplace */
+.page-item-title {
+  margin: 10px 0;
+}
+
+.page-item-info {
+  margin-bottom: 7px;
+}
+
+.page-item-picture,
+.page-item-list-item-icon {
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+}
+
+/* Language */
+.language-list {
+  width: 100%;
+  text-align: left;
+}
+
+.language-list-item {
+  width: 25%;
+}

@@ -3,9 +3,44 @@ import { h } from 'hyperapp';
 
 export const createRouter = ({ routes, defaultRoute }) => {
   const getRouteKeyFromPath = (path) => path ? path.replace('/', '').toUpperCase() : '';
-  const getRouteFromKey = (key) => routes[key] || defaultRoute;
-  const initialRouteKey = getRouteKeyFromPath(window.location.pathname);
-  const initialRoute = getRouteFromKey(initialRouteKey);
+
+  const matchPath = (path) => {
+    // NOTE: Object key order is not guaranteed, we could provide an array instead
+    // https://stackoverflow.com/questions/5525795/does-javascript-guarantee-object-property-order
+    for (let key in routes) {
+      if (!routes.hasOwnProperty(key)) continue;
+
+      const route = routes[key];
+      const params = {};
+      const routeParts = route.path.split('/').filter(identity);
+      const pathParts = path.split('/').filter(identity);
+
+      // TODO: Match `/a/b/c` to `:url`
+      if (routeParts.length !== pathParts.length) continue;
+
+      let matched;
+      for (let index = 0; index < routeParts.length; index++) {
+        const routePart = routeParts[index];
+        const pathPart = pathParts[index];
+        if (routePart === pathPart) {
+          matched = true;
+        }
+        else if (routePart.charAt(0) !== ':') {
+          matched = false;
+          break;
+        }
+        else {
+          matched = true;
+          params[routePart.slice(1)] = pathPart;
+        }
+      }
+
+      if (matched) return { route, params };
+    }
+
+    return { route: defaultRoute, params: {} };
+  };
+  const initial = matchPath(window.location.pathname);
 
   // NOTE: Allows us to use the `setRoute` action in the `Link` component
   let setRoute;
@@ -14,14 +49,16 @@ export const createRouter = ({ routes, defaultRoute }) => {
     init(state, actions) {
       setRoute = actions.setRoute;
 
-      window.history.replaceState(initialRouteKey, null, initialRoute.path);
+      const initialRouteKey = getRouteKeyFromPath(window.location.pathname);
+      window.history.replaceState(initialRouteKey, null, window.location.pathname);
       window.addEventListener('popstate', (e) => {
         // NOTE: We're restoring the state from the route key, which will stop working if we change a route's key
         actions.setRoute({ route: getRouteFromKey(e && e.state), options: { skipHistoryStateUpdate: true } });
       });
     },
     state: {
-      route: initialRoute
+      route: initial.route,
+      params: initial.params
     },
     actions: {
       setRoute(state, actions, { route, options }) {
@@ -36,11 +73,12 @@ export const createRouter = ({ routes, defaultRoute }) => {
         }
 
         if (route.title) {
-          // TODO: Dynamic title
+          // TODO: Dynamic / async title
           document.title = `Civvy - ${route.title}`;
         }
 
-        return { route: route };
+        // TODO: Return params
+        return { route };
       }
     }
   };
@@ -67,3 +105,5 @@ export const createRouter = ({ routes, defaultRoute }) => {
     Link
   };
 };
+
+const identity = (x) => x;

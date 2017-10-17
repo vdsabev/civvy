@@ -1,0 +1,13 @@
+@media screen {
+  .page-break {
+    display: none;
+  }
+}
+
+@media print {
+  .page-break {
+    display: block;
+    height: 2rem;
+    page-break-before: always;
+  }
+}

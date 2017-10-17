@@ -38,8 +38,12 @@ const firebase = {
 };
 
 export const Services = {
-  Portfolio: {
+  Page: {
     query: firebase.get(() => `pages`),
-    get: firebase.get(({ portfolioId }) => `pages/${portfolioId}`)
+    get: firebase.get(({ pageId }) => `pages/${pageId}`)
+  },
+
+  Candidate: {
+    get: firebase.get(({ candidateId }) => `candidates/${candidateId}`)
   }
 };

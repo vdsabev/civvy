@@ -60,6 +60,20 @@
     ]
   },
   "eslintConfig": {
+    "plugins": [
+      "react"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "globals": {
+      "process": true
+    },
     "parserOptions": {
       "ecmaVersion": 5,
       "ecmaFeatures": {
@@ -68,8 +82,14 @@
       },
       "sourceType": "module"
     },
-    "env": {
-      "es6": true
+    "rules": {
+      "no-unknown-property": false,
+      "react/display-name": false
+    },
+    "settings": {
+      "react": {
+        "pragma": "h"
+      }
     }
   }
 }
