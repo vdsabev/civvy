@@ -4,10 +4,90 @@ body {
   height: 100%;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   line-height: 24px;
   color: var(--foreground);
   font-family: var(--fontText);
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  transition: all var(--animationDuration) var(--animationEasing);
+  transition-property: opacity, filter;
+}
+
+fieldset[disabled] {
+  opacity: 0.8;
+  filter: grayscale(100%);
+}
+
+fieldset[disabled],
+fieldset[disabled] textarea,
+fieldset[disabled] input,
+fieldset[disabled] button {
+  cursor: not-allowed;
+}
+
+
+fieldset.loading,
+fieldset.loading textarea,
+fieldset.loading input,
+fieldset.loading button {
+  cursor: progress;
+}
+
+textarea,
+input,
+button {
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  padding: 1rem 0.6rem;
+  transition: all var(--animationDuration) var(--animationEasing);
+}
+
+textarea,
+input {
+  outline: none;
+  border: 1px solid var(--neutral);
+  font-family: var(--fontText), sans-serif;
+  font-size: 1rem;
+  transition-property: box-shadow;
+}
+
+textarea:focus,
+input:focus {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 200px;
+  max-height: 600px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  transition-property: box-shadow;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.5em;
 }
 
 h1 { font-size: var(--h1FontSize); }
@@ -25,3 +105,13 @@ tr {
   page-break-inside: avoid;
   page-break-after: auto;
 }
+
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.w-100p { width: 100%; }

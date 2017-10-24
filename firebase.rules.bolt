@@ -1,0 +1,74 @@
+// Paths
+path /users/{userId}/profiles is Profile[] {
+  read() { isCurrentUser(userId) }
+  write() { isCurrentUser(userId) }
+}
+
+path /users/{userId}/resumes is Resume[] {
+  read() { isCurrentUser(userId) }
+  write() { isCurrentUser(userId) }
+}
+
+// Types
+type Profile {
+  name: String
+  email: String
+  phone: String | Null
+  birthdate: String | Null
+  imageUrl: String | Null
+}
+
+type Resume {
+  name: String
+  accentColor: String
+  profile: String
+  workplaces: Workplace[]
+  education: Education[]
+  languages: Language[]
+}
+
+type Workplace {
+  name: String
+  websiteUrls: String[]
+  pictureUrl: String | Null
+  position: String | Null
+  period: Period
+  descriptions: String | String[]
+  pageBreak: String | Null
+}
+
+type Education {
+  name: String
+  pictureUrl: String | Null
+  position: String
+  period: Period,
+  subjects: String[] // TODO: Migrate `subjects.name` to `subjects`
+  pageBreak: String | Null
+}
+
+type Language {
+  name: String
+  understanding: String
+  speaking: String
+  writing: String
+}
+
+type Skills {
+  name: String
+  description: String | Null
+  pageBreak: String | Null
+}
+
+type Period {
+  from: String
+  to: String | Null
+}
+
+// Functions
+function isAuthenticated() {
+  auth != null
+}
+
+function isCurrentUser(uid) {
+  isAuthenticated() && auth.uid == uid
+}

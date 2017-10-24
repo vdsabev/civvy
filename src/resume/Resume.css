@@ -1,37 +1,46 @@
-.page-header .fa,
-.page-timeline-point .fa {
+.resume {
+  background: var(--neutralLight);
+}
+
+.resume-header .fa,
+.resume-timeline-point .fa {
   margin-right: 0.25rem;
 }
 
-.page-item-info .fa,
+.resume-item-info .fa,
 .language-list .fa {
   margin-right: 0.25rem;
   margin-left: 0.25rem;
 }
 
-.page-section {
-  margin: 0 auto;
-  padding: 35px 30px;
+.resume-section {
   width: 100%;
-  max-width: 680px;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px 30px;
 }
 
-.page-header,
-.page-header-link {
+.resume-header,
+.resume-header-link {
   color: var(--neutralLight);
 }
 
-.page-timeline {
+.resume-title {
+  line-height: 2em;
+  margin: 0.25em 0;
+}
+
+.resume-timeline {
   page-break-inside: avoid;
   page-break-after: auto;
 }
 
-.page-timeline-point {
+.resume-timeline-point {
   line-height: 24px;
   font-variant: small-caps;
 }
 
-.page-timeline-content {
+.resume-timeline-content {
   margin-top: 0;
   margin-left: 8px;
   border-left: 5px solid var(--neutral);
@@ -40,27 +49,27 @@
   padding-left: 12px;
 }
 
-.page-spacer {
+.resume-spacer {
   margin-bottom: 5px;
 }
 
-/* Candidate */
-.candidate-picture {
+/* Profile */
+.profile-picture {
   border-radius: 50%;
   width: 128px;
 }
 
 /* Workplace */
-.page-item-title {
+.resume-item-title {
   margin: 10px 0;
 }
 
-.page-item-info {
+.resume-item-info {
   margin-bottom: 7px;
 }
 
-.page-item-picture,
-.page-item-list-item-icon {
+.resume-item-picture,
+.resume-item-list-item-icon {
   margin-right: 5px;
   width: 24px;
   text-align: center;

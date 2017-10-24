@@ -1,0 +1,59 @@
+.home {
+  min-height: 100vh;
+  color: var(--neutralLight);
+}
+
+.home-hero {
+  max-width: 320px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-logo {
+  margin-bottom: -40px;
+}
+
+.home-text {
+  font-size: 1.55rem;
+  margin-bottom: 2.5rem;
+}
+
+.home-button {
+  display: block;
+  border-radius: 0.25rem;
+  border: 3px solid;
+  padding: 0.5rem 0.75rem;
+  transition: all var(--animationDuration) var(--animationEasing);
+  transition-property: background, color;
+}
+
+.home-button.register {
+  border-color: var(--success);
+  background: var(--success);
+}
+
+.home-button.register:hover {
+  background: var(--primary);
+}
+
+.home-button.login,
+.home-button.logout {
+  border-color: var(--neutralLight);
+  background: var(--neutralLight);
+  color: var(--primary);
+}
+
+.home-button.login:hover,
+.home-button.logout:hover {
+  background: var(--primary);
+  color: var(--neutralLight);
+}
+
+.home-button.logout {
+  display: inline;
+  margin: 0 0 0 0.5rem;
+}
+
+.home-spacer {
+  margin-bottom: 0.5rem;
+}

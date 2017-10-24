@@ -1,0 +1,25 @@
+.resumes {
+  display: grid;
+  grid-gap: 1rem;
+  margin: 1rem;
+}
+
+@media (min-width: 640px) {
+  .resumes {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    margin: 2rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .resumes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.resume-item {
+  border: 3px solid var(--neutralLight);
+  border-radius: 0.25rem;
+  padding: 1rem;
+}

@@ -23,11 +23,11 @@ style.css = {
   neutral: '#ecf0f1',
   neutralDark: '#95a5a6',
 
-  primary: '#2980b9',
+  primary: '#3498db',
   success: '#2ecc71',
   warning: '#f1c40f',
   danger: '#e74c3c',
-  info: '#3498db',
+  info: '#2980b9',
 
   h1FontSize: '48px',
   h2FontSize: '30px',

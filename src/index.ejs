@@ -10,11 +10,14 @@
     <meta content="320" name="MobileOptimized">
     <meta content="on" http-equiv="cleartype">
 
+    <% const { primary } = htmlWebpackPlugin.options.style.css; %>
+    <meta name="theme-color" content="<%= primary %>">
+
     <base href="/">
     <link rel="shortcut icon" href="favicon.png">
 
-    <% const values = (obj) => Object.keys(obj).map((key) => obj[key]) %>
-    <% const fonts = htmlWebpackPlugin.options.style.fonts; %>
+    <% const values = (obj) => Object.keys(obj).map((key) => obj[key]); %>
+    <% const { fonts } = htmlWebpackPlugin.options.style; %>
     <link href="https://fonts.googleapis.com/css?family=<%= values(fonts).map((font) => font.split(/\s+/).join('+')).join('|') %>" rel="stylesheet">
   </head>
 

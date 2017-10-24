@@ -15,12 +15,14 @@ const BUILD_DIR = './build';
 const APP_DIR = './src';
 const packageJson = require('./package.json');
 const style = require(`./${APP_DIR}/style`);
+const vendor = Object.keys(packageJson.dependencies).filter((dependency) => dependency.indexOf('@types/') === -1);
 
 module.exports = ({ production } = {}) => ({
   devtool: production ? false : 'inline-source-map',
   context: process.cwd(),
   entry: {
-    index: `./${APP_DIR}/index.js`
+    index: `./${APP_DIR}/index.js`,
+    vendor
   },
   output: {
     publicPath: '/',
@@ -41,6 +43,7 @@ module.exports = ({ production } = {}) => ({
   plugins: [
     production ? new CleanWebpackPlugin([`${BUILD_DIR}/*`]) : new NullPlugin(),
 
+    new webpack.optimize.CommonsChunkPlugin('vendor'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin(Object.assign(define(env), {
       'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development')

@@ -4,27 +4,41 @@ import './Page.css';
 import { h } from 'hyperapp';
 
 import { Actions } from '../app';
-import { Loader } from '../loader';
+import { Loader } from '../loader/Loader';
 import { animationDuration } from '../style';
 
+export const Pages = (props, children) => <div class="page-container" {...props}>{children}</div>;
+
 export const Page = (props) => {
+  if (process.env.NODE_ENV === 'development' & !props.route) {
+    throw new Error(`Invalid route ${props.route} for page '${props.module}'`);
+  }
+
   if (Actions.getRoute() !== props.route) return null;
 
-  const MaybeLoader = cacheAndResolveWithLoader(props.module, props.resolve);
+  const params = Actions.getRouteParams();
+  const MaybeLoader = cacheAndResolveWithLoader(props.module, params, props.resolve);
   if (MaybeLoader != null) return MaybeLoader;
+
+  const key = params ?
+    `${props.module}-${Object.keys(params).map((key) => `${key}=${params[key]}`).join('-')}`
+    :
+    props.module
+  ;
 
   return (
     <props.view
-      key={props.module}
+      key={key}
       onremove={props.cache ? fadeOutPage : invalidateCacheAndFadeOutPage(props.module) }
-      {...Actions.getModuleState(props.module)}
-    >{Actions.getModuleActions(props.module)}</props.view>
+      state={Actions.getModuleState(props.module)}
+      actions={Actions.getModuleActions(props.module)}
+    />
   );
 };
 
 const cachedModules = {};
 
-const cacheAndResolveWithLoader = (moduleKey, resolve) => {
+const cacheAndResolveWithLoader = (moduleKey, params, resolve) => {
   if (!resolve) return null;
 
   if (!cachedModules[moduleKey]) {
@@ -36,7 +50,7 @@ const cacheAndResolveWithLoader = (moduleKey, resolve) => {
 
   if (!cachedModule.$pending) {
     cachedModule.$pending = true;
-    resolve(Actions.getRouteParams())
+    resolve(params)
       .then(() => {
         cachedModule.$resolved = true;
         cachedModule.$pending = false;
