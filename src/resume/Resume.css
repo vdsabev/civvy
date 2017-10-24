@@ -62,7 +62,7 @@
 }
 
 .resume-header {
-  transition: background var(--animationDuration) var(--animationEasing);
+  transition: background var(--animationDurationLg) var(--animationEasing);
 }
 
 .resume-title {

@@ -1,6 +1,7 @@
 const style = {};
 
 style.animationDuration = 0.4;
+style.animationDurationLg = 5 * style.animationDuration;
 
 style.fonts = {
   text: 'Open Sans'
@@ -8,6 +9,8 @@ style.fonts = {
 
 style.css = {
   animationDuration: `${style.animationDuration}s`,
+  animationDurationLg: `${style.animationDurationLg}s`,
+
   animationEasing: 'cubic-bezier(0.25, 1, 0.25, 1)',
   animationElastic: 'cubic-bezier(0.5, 2, 0.5, 0.5)',
 
