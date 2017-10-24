@@ -1,7 +1,7 @@
 const style = {};
 
 style.animationDuration = 0.4;
-style.animationDurationLg = 5 * style.animationDuration;
+style.animationDurationLg = 4 * style.animationDuration;
 
 style.fonts = {
   text: 'Open Sans'
@@ -27,8 +27,6 @@ style.css = {
   neutralDark: '#95a5a6',
 
   primary: '#3498db',
-  primaryDark: '#217dbb',
-
   success: '#2ecc71',
   warning: '#f1c40f',
   danger: '#e74c3c',

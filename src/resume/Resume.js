@@ -6,6 +6,7 @@ import { h } from 'hyperapp';
 import { Actions, initialUserAuth } from '../app';
 import { flex } from '../flex';
 import { Services } from '../services';
+import { shade } from '../utils';
 
 import { LanguageLevel } from './LanguageLevel';
 import { PageBreak } from './PageBreak';
@@ -65,7 +66,7 @@ export const ResumeModule = {
 export const Resume = ResumeModule.view;
 
 const HeaderEdit = ({ resume, changed, setAccentColor, reset, save }) =>
-  <div class="resume-header-edit">
+  <div class="resume-header-edit" style={{ background: shade(resume.accentColor, -20) }}>
     <span>
       <input type="text" value={resume.accentColor} oninput={setAccentColor} />
     </span>

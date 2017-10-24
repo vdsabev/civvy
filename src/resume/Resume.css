@@ -20,12 +20,16 @@
   padding: 1.5rem 2rem;
 }
 
+.resume-header-edit,
+.resume-header {
+  transition: background var(--animationDurationLg) var(--animationEasing);
+}
+
 .resume-header-edit {
   display: grid;
   grid-template-columns: 1fr auto auto;
   grid-gap: 1rem;
   padding: 1rem;
-  background: var(--primaryDark);
 }
 
 .resume-header-edit input[type="text"],
@@ -59,10 +63,6 @@
 .resume-header,
 .resume-header-link {
   color: var(--neutralLight);
-}
-
-.resume-header {
-  transition: background var(--animationDurationLg) var(--animationEasing);
 }
 
 .resume-title {
