@@ -14,16 +14,40 @@ export const ResumeModule = {
   actions: {
     getData: (state, actions, { resumeId }) => (update) => initialUserAuth.then(() => {
       const { user } = Actions.getAuth();
-      return Services.Resume.get({ userId: user.uid, resumeId }).then((resume) => update({ resume })).then(actions.getProfile);
+      return (
+        Services.Resume.get({ userId: user.uid, resumeId })
+          .then((resume) => update({ resumeBackup: resume, resume, resumeId }))
+          .then(actions.getProfile)
+      );
     }),
     getProfile: (state, actions, { resume }) => (update) => {
       const { user } = Actions.getAuth();
-      return Services.Profile.get({ userId: user.uid, profileId: resume.profile }).then((profile) => update({ profile }));
+      return (
+        Services.Profile.get({ userId: user.uid, profileId: resume.profile })
+          .then((profile) => update({ profile }))
+      );
+    },
+
+    setAccentColor: (state, actions, e) => ({ resume: { ...state.resume, accentColor: e.currentTarget.value } }),
+    reset: (state, actions) => ({ resume: state.resumeBackup }),
+    save: (state, actions) => (update) => {
+      const { user } = Actions.getAuth();
+      return (
+        Services.Resume.update({ userId: user.uid, resumeId: state.resumeId }, state.resume)
+          .then(() => update({ resumeBackup: state.resume }))
+      );
     }
   },
   // TODO: Fade in animation
   view: ({ state, actions, ...props }) =>
     <div class="resume" {...props}>
+      <HeaderEdit
+        resume={state.resume}
+        changed={state.resume !== state.resumeBackup}
+        setAccentColor={actions.setAccentColor}
+        reset={actions.reset}
+        save={actions.save}
+      />
       <Header resume={state.resume} profile={state.profile} />
       <div class="resume-section">
         <h3 class="resume-title">Work Experience</h3>
@@ -40,9 +64,20 @@ export const ResumeModule = {
 
 export const Resume = ResumeModule.view;
 
+const HeaderEdit = ({ resume, changed, setAccentColor, reset, save }) =>
+  <div class="resume-header-edit">
+    <span>
+      <input type="text" value={resume.accentColor} oninput={setAccentColor} />
+    </span>
+
+    <button class="resume-reset" type="button" onclick={reset} disabled={!changed}>Reset</button>
+    <button class="resume-save" type="button" onclick={save} disabled={!changed}>Save</button>
+  </div>
+;
+
 const Header = ({ resume, profile }) =>
   <div class="resume-header" style={{ background: resume.accentColor }}>
-    <div class="resume-section flex-row justify-content-start align-items-center" style={{ background: resume.accentColor }}>
+    <div class="resume-section flex-row justify-content-start align-items-center">
       <div style={flex(1)}>
         <h1>{profile.name}</h1>
         <br />

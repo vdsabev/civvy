@@ -25,6 +25,7 @@ type Resume {
   workplaces: Workplace[]
   education: Education[]
   languages: Language[]
+  skills: Skill[]
 }
 
 type Workplace {
@@ -53,7 +54,7 @@ type Language {
   writing: String
 }
 
-type Skills {
+type Skill {
   name: String
   description: String | Null
   pageBreak: String | Null

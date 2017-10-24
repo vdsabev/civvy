@@ -24,6 +24,8 @@ style.css = {
   neutralDark: '#95a5a6',
 
   primary: '#3498db',
+  primaryDark: '#217dbb',
+
   success: '#2ecc71',
   warning: '#f1c40f',
   danger: '#e74c3c',
