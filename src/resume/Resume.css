@@ -26,6 +26,8 @@
 }
 
 .resume-header-edit {
+  position: sticky;
+  top: 0;
   display: grid;
   grid-template-columns: 1fr auto auto;
   grid-gap: 1rem;
